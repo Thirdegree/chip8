@@ -104,15 +104,15 @@ void chip8::emulateCycle() {
     //decode
     switch(opcode & 0xF000) {
         case 0x000:
-            switch (opcode & 0x000F) {
-                case 0x0000: // Clears the screen
+            switch (opcode & 0x00FF) {
+                case 0x00E0: // Clears the screen
                     for (int i = 0; i < 32 * 64; i++) {
                         gfx[i] = 0;
                     }
                     drawFlag = true;
                     break; 
                     pc += 2;
-                case 0x000E: // Returns from a subroutine
+                case 0x00EE: // Returns from a subroutine
                     pc = stack[sp];
                     --sp;
                     pc += 2;
